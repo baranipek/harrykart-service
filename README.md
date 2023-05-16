@@ -131,11 +131,12 @@ When you are done, zip the project (without the target folder) and send it back 
 
 If you want to run the test use the command below 
 
-gradle test 
+./gradlew test
 
 If you want to run the app, use the command below
 
-gradle bootRun
+ ./gradlew  bootRun 
+
 
 
 
