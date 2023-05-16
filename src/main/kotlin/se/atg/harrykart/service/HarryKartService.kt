@@ -11,7 +11,21 @@ class HarryKartService {
     @Value("\${distance}")
     private var trackLength: Double = 0.0
 
-    fun getResults(harryKartRequest: HarryKartRequest): List<RaceResultDto> {
+    fun getRaceResults(harryKartRequest: HarryKartRequest): List<RaceResultDto> {
+        val raceResults = iterateRaceResults(harryKartRequest)
+
+        raceResults.removeIf { raceResult -> !raceResult.isCompleted }
+        return raceResults.sortedWith(compareBy { it.averageSpeedTime }).mapIndexed { index, raceResult ->
+            raceResult.copy(
+                position = index + 1
+            )
+        }
+            .take(3).map { RaceResultDto(it.horse, it.position) }
+
+
+    }
+
+    private fun iterateRaceResults(harryKartRequest: HarryKartRequest): ArrayList<RaceResult> {
         val raceResults = ArrayList<RaceResult>()
 
         harryKartRequest.startList.participants.forEach { p ->
@@ -32,15 +46,6 @@ class HarryKartService {
 
             raceResults.add(raceResult)
         }
-
-        raceResults.removeIf { raceResult -> !raceResult.isCompleted }
-        return raceResults.sortedWith(compareBy { it.averageSpeedTime }).mapIndexed { index, raceResult ->
-            raceResult.copy(
-                position = index + 1
-            )
-        }
-            .take(3).map { RaceResultDto(it.horse, it.position) }
-
-
+        return raceResults
     }
 }

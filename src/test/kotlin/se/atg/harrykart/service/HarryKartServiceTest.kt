@@ -29,7 +29,7 @@ internal class HarryKartServiceTest {
     fun shouldParseXmlAndReturnDataCaseOneAsExpected() {
         val input = HarryKartUtility.readXmlFile("input_0.xml")
 
-        val actual = harryKartService.getResults(input)
+        val actual = harryKartService.getRaceResults(input)
 
         assertNotNull(actual)
         assertEquals(actual.size,3)
@@ -46,7 +46,7 @@ internal class HarryKartServiceTest {
     fun shouldParseXmlAndReturnDataCaseTwoAsExpected() {
 
         val input = HarryKartUtility.readXmlFile("input_2.xml")
-        val actual = harryKartService.getResults(input)
+        val actual = harryKartService.getRaceResults(input)
 
         assertNotNull(actual)
         assertEquals(actual.size,3)

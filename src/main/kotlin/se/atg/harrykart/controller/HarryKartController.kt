@@ -22,7 +22,7 @@ class HarryKartController(private val service: HarryKartService) {
     )
     fun playHarryKart(@RequestBody inputXml: String): List<RaceResultDto> {
         try {
-            return service.getResults(HarryKartUtility.mapXmlFileToDto(inputXml))
+            return service.getRaceResults(HarryKartUtility.mapXmlFileToDto(inputXml))
         } catch (exception: Exception) {
             throw XmlFormatException(HttpStatus.BAD_REQUEST, "An error occurred while processing the request")
         }
